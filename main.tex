@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+Consider the parameterized ODE initial value problem
+\begin{equation}
+    \dot y = f(t, y, a), \qquad y(0, a) = y_0(a),
+\end{equation}
+by which we mean
+\begin{equation}
+    \partial_0 y(t, a) = f(t, y(t, a), a). \qquad y(0, a) = y_0(a).
+\end{equation}
+We want to understand how the solution to the ODE changes (e.g. at particular
+values of $t$) for small perturbations of $a$. That is, we want to compute the
+Jacobian-vector product
+\begin{equation}
+    (a, v) \mapsto \partial_1 y(t, a)[v]
+\end{equation}
+where $v$ is a small perturbation to $a$.
+
+Since the ODE holds true for all values of $a$ (or at least those close to a
+particular $a_0$ in which we are interested), we can view both sides as
+functions of $a$, and assuming differentiability we can differentiate both
+sides with respect to $a$ to find a new equation that must be satisfied:
+\begin{equation}
+    \partial_1 \partial_0 y(t, a) = \partial_2 f(t, y(t, a), a) + \partial_1 f(t, y(t, a), a) \partial_1 y(t, a).
+\end{equation}
+Using the fact that partial derivatives commute, we can identify $z(t, a)
+\triangleq \partial_1 y(t, a)$ as a new state vector to write a joint ODE system
+\begin{equation}
+    \begin{bmatrix}
+        \dot y \\
+        \dot z
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        f(t, y) \\
+        g(t, y, z)
+    \end{bmatrix}
+\end{equation}
+where $g(t, y, z) = \partial_2 f(t, y, a) + \partial_1 f(t, y, a) z$. Notice
+that the dynamics on the $z$ component are linear/affine.
+\end{document}
+
