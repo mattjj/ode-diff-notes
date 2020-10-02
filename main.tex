@@ -54,14 +54,14 @@ Using the fact that partial derivatives commute, we can identify $z(t, a)
 \end{gather}
 Notice that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!).
 
-\section{Vector-Jacobian products (for reverse-mode autodiff)}
+\section{Vector-Jacobian products}
 Consider the parameterized linear/affine ODE IVP
 \begin{equation}
     \partial_0 z(t) = A(t) z(t) + B(t) v, \qquad z(0) = C v.
 \end{equation}
 On the vector/affine space of solutions $\mathcal{Y}$ consider a nice linear
-functional $c: \mathcal{Y} \to \mathbb{R}$. This induces a linear function on
-the vector space of possible perturbations $v$.
+functional $\mathcal{D}: \mathcal{Y} \to \mathbb{R}$. This induces a linear
+function on the vector space of possible perturbations $v$.
 
 
 \end{document}
