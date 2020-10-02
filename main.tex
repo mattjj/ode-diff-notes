@@ -29,7 +29,7 @@ sides with respect to $a$ to find a new equation that must be satisfied:
 \end{equation}
 Using the fact that partial derivatives commute, we can identify $z(t, a)
 \triangleq \partial_1 y(t, a)[v]$ as a new state vector to write a joint ODE system
-\begin{equation}
+\begin{gather}
     \begin{bmatrix}
         \dot y \\
         \dot z
@@ -40,18 +40,28 @@ Using the fact that partial derivatives commute, we can identify $z(t, a)
         g(t, y, z, a)
     \end{bmatrix},
     \qquad
-    g(t, y, z, a) = \partial_2 f(t, y, a)[v] + \partial_1 f(t, y, a)[z].
-\end{equation}
+    \begin{bmatrix}
+        y(0, a) \\
+        z(0, a)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        y_0(a) \\
+        \partial y_0(a)[v]
+    \end{bmatrix},
+    \\
+    g(t, y, z, a) = \partial_1 f(t, y, a)[z] + \partial_2 f(t, y, a)[v].
+\end{gather}
 Notice that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!).
 
-% \section{Vector-Jacobian products (for reverse-mode autodiff)}
-% Consider the parameterized linear/affine ODE
-% \begin{equation}
-%     \partial_0 y(t, a) = A(t, a) y(t, a) + b(t, a), \qquad y(0, a) = y_0(a).
-% \end{equation}
-% On the vector/affine space of solutions $\mathcal{Y}$ consider a nice linear
-% functional $c: \mathcal{Y} \to \mathbb{R}$. At a given operating point $a_0$
-% we want to pull this back to a linear function on $a$, such that
+\section{Vector-Jacobian products (for reverse-mode autodiff)}
+Consider the parameterized linear/affine ODE IVP
+\begin{equation}
+    \partial_0 z(t) = A(t) z(t) + B(t) v, \qquad z(0) = C v.
+\end{equation}
+On the vector/affine space of solutions $\mathcal{Y}$ consider a nice linear
+functional $c: \mathcal{Y} \to \mathbb{R}$. This induces a linear function on
+the vector space of possible perturbations $v$.
 
 
 \end{document}
