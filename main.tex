@@ -29,19 +29,20 @@ sides with respect to $a$ to find a new equation that must be satisfied:
 \end{equation}
 Using the fact that partial derivatives commute, we can identify $z(t, a)
 \triangleq \partial_1 y(t, a)[v]$ as a new state vector to write a joint ODE system
-\begin{equation}
+\begin{align*}
     \begin{bmatrix}
         \dot y \\
         \dot z
     \end{bmatrix}
-    =
+    &=
     \begin{bmatrix}
-        f(t, y) \\
-        g(t, y, z)
-    \end{bmatrix}
-\end{equation}
-where $g(t, y, z) = \partial_2 f(t, y, a)[v] + \partial_1 f(t, y, a)[z]$. Notice
-that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!).
+        f(t, y, a) \\
+        g(t, y, z, a)
+    \end{bmatrix},
+    \\
+    g(t, y, z, a) &= \partial_2 f(t, y, a)[v] + \partial_1 f(t, y, a)[z].
+\end{align*}
+Notice that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!).
 
 % \section{Vector-Jacobian products (for reverse-mode autodiff)}
 % Consider the parameterized linear/affine ODE
