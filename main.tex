@@ -3,7 +3,7 @@
 \usepackage{amssymb}
 
 \begin{document}
-\section{Jacobian-vector products (for forward-mode autodiff)}
+\section{Jacobian-vector products}
 Consider the parameterized ODE initial value problem
 \begin{equation}
     \dot y = f(t, y, a), \qquad y(0, a) = y_0(a),
@@ -29,19 +29,19 @@ sides with respect to $a$ to find a new equation that must be satisfied:
 \end{equation}
 Using the fact that partial derivatives commute, we can identify $z(t, a)
 \triangleq \partial_1 y(t, a)[v]$ as a new state vector to write a joint ODE system
-\begin{align*}
+\begin{equation}
     \begin{bmatrix}
         \dot y \\
         \dot z
     \end{bmatrix}
-    &=
+    =
     \begin{bmatrix}
         f(t, y, a) \\
         g(t, y, z, a)
     \end{bmatrix},
-    \\
-    g(t, y, z, a) &= \partial_2 f(t, y, a)[v] + \partial_1 f(t, y, a)[z].
-\end{align*}
+    \qquad
+    g(t, y, z, a) = \partial_2 f(t, y, a)[v] + \partial_1 f(t, y, a)[z].
+\end{equation}
 Notice that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!).
 
 % \section{Vector-Jacobian products (for reverse-mode autodiff)}
