@@ -10,25 +10,32 @@ Consider the parameterized ODE initial value problem
 \end{equation}
 by which we mean
 \begin{equation}
-    \partial_0 y(t, a) = f(t, y(t, a), a). \qquad y(0, a) = y_0(a).
+    \partial_0 y(t, a) = f(t, y(t, a), a). \qquad y(0, a) = y_0(a)
 \end{equation}
+for all $t$ and $a$ in some domains.
 We want to understand how the solution to the ODE changes (e.g. at particular
-values of $t$) for small perturbations of $a$. That is, we want to compute the
-Jacobian-vector product
+values of $t$) for small perturbations of $a$. That is, we want to be able to
+compute the Jacobian-vector product
 \begin{equation}
     (a, v) \mapsto \partial_1 y(t, a)[v]
 \end{equation}
-where $v$ is a small perturbation to $a$.
+at any particular values of $t$ and $a$, where $v$ can be interpreted as a
+small perturbation to the value of $a$.
 
 Since the ODE holds true for all values of $a$ (or at least those close to a
 particular $a_0$ in which we are interested), we can view both sides as
 functions of $a$, and assuming differentiability we can differentiate both
 sides with respect to $a$ to find a new equation that must be satisfied:
 \begin{equation}
-    \partial_1 \partial_0 y(t, a) = \partial_2 f(t, y(t, a), a) + \partial_1 f(t, y(t, a), a) \circ \partial_1 y(t, a).
+    \partial_1 \partial_0 y(t, a) = \partial_2 f(t, y(t, a), a) + \partial_1 f(t, y(t, a), a) \circ \partial_1 y(t, a),
 \end{equation}
-Using the fact that partial derivatives commute, we can identify $z(t, a)
-\triangleq \partial_1 y(t, a)[v]$ as a new state vector to write a joint ODE system
+or, applied to a particular perturbation vector (and using the fact that partial derivaives commute),
+\begin{equation}
+    \partial_0 (\, (t, a) \mapsto \partial_1 y(t, a)[v] \,) = \partial_2 f(t, y(t, a), a)[v] + \partial_1 f(t, y(t, a), a) [ \, \partial_1 y(t, a)[v] \,].
+    \notag
+\end{equation}
+We can identify $z(t, a) \triangleq \partial_1 y(t, a)[v]$ as a new state
+vector to write a joint ODE system
 \begin{gather}
     \begin{bmatrix}
         \dot y \\
@@ -57,7 +64,7 @@ Notice that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!
 \section{Vector-Jacobian products}
 Consider the parameterized linear/affine ODE IVP
 \begin{equation}
-    \partial_0 z(t) = A(t) z(t) + B(t) v, \qquad z(0) = C v.
+    \partial z(t) = A(t) z(t) + B(t) v, \qquad z(0) = C v.
 \end{equation}
 On the vector space of solutions $\mathcal{Z}$ consider a nice linear
 functional $\mathcal{D}: \mathcal{Z} \to \mathbb{R}$. This induces a linear
