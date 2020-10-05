@@ -10,7 +10,7 @@ Consider the parameterized ODE initial value problem
 \end{equation}
 by which we mean
 \begin{equation}
-    \partial_0 y(t, a) = f(t, y(t, a), a). \qquad y(0, a) = y_0(a)
+    \partial_0 y(t, a) = f(t, y(t, a), a), \qquad y(0, a) = y_0(a),
 \end{equation}
 for all $t$ and $a$ in some domains.
 We want to understand how the solution to the ODE changes (e.g. at particular
@@ -27,9 +27,10 @@ particular $a_0$ in which we are interested), we can view both sides as
 functions of $a$, and assuming differentiability we can differentiate both
 sides with respect to $a$ to find a new equation that must be satisfied:
 \begin{equation}
-    \partial_1 \partial_0 y(t, a) = \partial_2 f(t, y(t, a), a) + \partial_1 f(t, y(t, a), a) \circ \partial_1 y(t, a),
+    \partial_1 \partial_0 y(t, a) = \partial_2 f(t, y(t, a), a) + \partial_1 f(t, y(t, a), a) \circ \partial_1 y(t, a).
 \end{equation}
-or, applied to a particular perturbation vector (and using the fact that partial derivaives commute),
+Applying both sides to a particular perturbation vector $v$ and using the fact
+that partial derivaives commute, we have
 \begin{equation}
     \partial_0 (\, (t, a) \mapsto \partial_1 y(t, a)[v] \,) = \partial_2 f(t, y(t, a), a)[v] + \partial_1 f(t, y(t, a), a) [ \, \partial_1 y(t, a)[v] \,].
     \notag
