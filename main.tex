@@ -106,13 +106,8 @@ to find a function $\lambda(t)$ such that
 \begin{equation}
     \lambda(t)^\mathsf{T} z(t) = w^\mathsf{T} z(T).
 \end{equation}
-We can do that by fixing $\lambda(T) = w$ and ensuring that the value of
-$\lambda(t) z(t)$ does not change with time:
-\begin{equation}
-     w^\mathsf{T} z(T) = \lambda(t)^\mathsf{T} z(t).
-\end{equation}
-This constraint can be transformed into a differential equation on $\lambda(t)$
-by differentiating both sides
+That is, we can fix $\lambda(T) = w$ and ensure that the value of
+$\lambda(t)^\mathsf{T} z(t)$ does not change with time:
 \begin{align}
     0 &= \partial (\, t \mapsto \lambda(t)^\mathsf{T} z(t) \,)
     = \dot \lambda(t)^\mathsf{T} z(t) + \lambda(t)^\mathsf{T} \dot z(t)
