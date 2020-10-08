@@ -157,6 +157,9 @@ differentiating both sides of~\eqref{eq:representer} with respect to time:
 \begin{align}
     0 &= \lambda(t)^\mathsf{T} \dot z(t) + \dot \lambda(t)^\mathsf{T} z(t) - \lambda(t)^\mathsf{T} B(t) v
     \\
+    &=
+    \lambda(t)^\mathsf{T} \left( A(t) z(t) + B(t) v \right) + \dot \lambda(t)^\mathsf{T} z(t) - \lambda(t)^\mathsf{T} B(t) v
+    \\
     &= \lambda(t)^\mathsf{T} A(t) z(t) + \dot \lambda(t)^\mathsf{T} z(t),
 \end{align}
 and so as before $\lambda(t)$ must satisfy the linear ODE IVP
