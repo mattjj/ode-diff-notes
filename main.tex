@@ -71,8 +71,8 @@ Consider the parameterized linear/affine ODE IVP
 The implicit mapping $\mathcal{T}_1: v \mapsto z$ is linear, and so for any
 linear functional on solution functions $\mathcal{T}_2 : z \mapsto \mathbb{R}$
 there is linear function on perturbations $v$ defined by $\mathcal{T}_2 \circ
-\mathcal{T}_1 : v \mapsto \mathbb{R}$. Given such a linear functional
-$\mathcal{T}_2$, we wish to find an explicit representer vector for
+\mathcal{T}_1 : v \mapsto \mathbb{R}$. Given a representer for such a linear
+functional $\mathcal{T}_2$, we wish to find an explicit representer vector for
 $\mathcal{T}_2 \circ \mathcal{T}_1$.
 
 Concretely, consider linear functionals of the form
@@ -120,8 +120,8 @@ To satisfy this equation for all $t$ and nonzero solutions $z(t)$, we can choose
     \dot \lambda(t) = - A(t)^\mathsf{T} \lambda(t), \qquad \lambda(T) = w.
 \end{equation}
 This gives us a means of computing a representer for the linear functional
-$\mathcal{T}_2$ by solving another ODE IVP, integrating backward in time from
-$t=T$ to $t=0$ to compute $\lambda(0)$.
+$\mathcal{T}_2 \circ \mathcal{T}_1$ by solving another ODE IVP, integrating
+backward in time from $t=T$ to $t=0$ to compute $\lambda(0)$.
 (Notice that by linearity we can handle a linear functional that is a linear
 combination of such weighted evaluation functionals, say at times $0 < T_1 <
 T_2$, by pulling back the functional at time $t=T_2$ to a representer at time
