@@ -62,12 +62,13 @@ vector to write a joint ODE system
 \end{gather}
 Notice that the dynamics on the $z$ component are linear/affine in $z$ (and $v$!).
 
-\section{Vector-Jacobian products}
-Consider the parameterized linear/affine ODE IVP
+\section{Transposing linear ODEs}
+Consider the parameterized linear ODE IVP
 \begin{equation}
-    \dot z(t) = A(t) z(t) + B(t) v, \qquad z(0) = C v.
+    \dot z(t) = A(t) z(t) + B(t) v, \qquad z(0) = C v,
     \label{eq:linear_ode}
 \end{equation}
+as a function of $v$.
 The implicit mapping $\mathcal{T}_1: v \mapsto z$ is linear, and so for any
 linear functional on solution functions $\mathcal{T}_2 : z \mapsto \mathbb{R}$
 there is linear function on perturbations $v$ defined by $\mathcal{T}_2 \circ
@@ -75,18 +76,18 @@ there is linear function on perturbations $v$ defined by $\mathcal{T}_2 \circ
 functional $\mathcal{T}_2$, we wish to find an explicit representer vector for
 $\mathcal{T}_2 \circ \mathcal{T}_1$.
 
-Concretely, consider linear functionals of the form
-\begin{equation}
-    \mathcal{T}_2[z] = w_T^\mathsf{T} z(T) + \int_0^T w(t)^\mathsf{T} z(t) \, \mathrm{d}t.
-    \label{eq:functional}
-\end{equation}
-We wish to find a function $\lambda(t)$ such that
-\begin{equation}
-    w_T^\mathsf{T} z(T) + \int_0^T w(t)^\mathsf{T} z(t) \, \mathrm{d}t
-    =
-    \lambda(0)^\mathsf{T} C v + \int_0^T \lambda(t)^\mathsf{T} B(t)[v] \, \mathrm{d}t,
-\end{equation}
-for all $v$, when $z$ is a solution to~\eqref{eq:linear_ode}.
+% Concretely, consider linear functionals of the form
+% \begin{equation}
+%     \mathcal{T}_2[z] = w_T^\mathsf{T} z(T) + \int_0^T w(t)^\mathsf{T} z(t) \, \mathrm{d}t.
+%     \label{eq:functional}
+% \end{equation}
+% We wish to find a function $\lambda(t)$ such that
+% \begin{equation}
+%     w_T^\mathsf{T} z(T) + \int_0^T w(t)^\mathsf{T} z(t) \, \mathrm{d}t
+%     =
+%     \lambda(0)^\mathsf{T} C v + \int_0^T \lambda(t)^\mathsf{T} B(t)[v] \, \mathrm{d}t,
+% \end{equation}
+% for all $v$, when $z$ is a solution to~\eqref{eq:linear_ode}.
 
 Consider first the special case when $B \equiv 0$, so that we have the ODE
 \begin{equation}
@@ -96,6 +97,7 @@ Consider first the special case when $B \equiv 0$, so that we have the ODE
 Moreover consider the special case of a weighted evaluation functional
 \begin{equation}
     \mathcal{T}_2[z] = w^\mathsf{T} z(T).
+    \label{eq:evaluation_functional}
 \end{equation}
 We wish to find a representer vector $\lambda$ such that
 \begin{equation}
@@ -105,6 +107,7 @@ Since the particular time $t=0$ is arbitrary, a more general problem would be
 to find a function $\lambda(t)$ such that
 \begin{equation}
     \lambda(t)^\mathsf{T} z(t) = w^\mathsf{T} z(T).
+    \label{eq:representer_simple}
 \end{equation}
 That is, we can fix $\lambda(T) = w$ and ensure that the value of
 $\lambda(t)^\mathsf{T} z(t)$ does not change with time:
@@ -115,16 +118,69 @@ $\lambda(t)^\mathsf{T} z(t)$ does not change with time:
     &= \dot \lambda(t)^\mathsf{T} z(t) + \lambda(t)^\mathsf{T} A(t) z(t),
 \end{align}
 where on the last line we have used the ODE~\eqref{eq:linear_ode_simple}.
-To satisfy this equation for all $t$ and nonzero solutions $z(t)$, we can choose
+To satisfy this equation for all $t$ and arbitrary solutions $z(t)$, we can
+choose
 \begin{equation}
     \dot \lambda(t) = - A(t)^\mathsf{T} \lambda(t), \qquad \lambda(T) = w.
+    \label{eq:adjoint_ode_simple}
 \end{equation}
 This gives us a means of computing a representer for the linear functional
-$\mathcal{T}_2 \circ \mathcal{T}_1$ by solving another ODE IVP, integrating
-backward in time from $t=T$ to $t=0$ to compute $\lambda(0)$.
-(Notice that by linearity we can handle a linear functional that is a linear
+$\mathcal{T}_2 \circ \mathcal{T}_1$ by solving the ODE
+IVP~\eqref{eq:adjoint_ode_simple}, integrating backward in time from $t=T$ to
+$t=0$ to compute $\lambda(0)$.
+Notice that by linearity we can handle a functional that is a linear
 combination of such weighted evaluation functionals, say at times $0 < T_1 <
 T_2$, by pulling back the functional at time $t=T_2$ to a representer at time
-$t=T_1$ and summing before pulling back the sum to $t=0$.)
+$t=T_1$ and summing before pulling back the sum to $t=0$.
+
+We can follow a similar argument when $B \not \equiv 0$. For a $z$
+solving~\eqref{eq:linear_ode} and a linear functional of the
+form~\eqref{eq:evaluation_functional}, we can seek a function $\lambda(t)$
+that represents the linear function by satisfying
+\begin{equation}
+    w^\mathsf{T} z(T) = \lambda(t)^\mathsf{T} z(t) - \int_T^t \lambda(\tau)^\mathsf{T} B(\tau) v \, \mathrm{d} \tau,
+    \label{eq:representer}
+\end{equation}
+for all times $t$. In particular, at time $t=0$ we would have
+\begin{equation}
+    w^\mathsf{T} z(T) = \lambda(0)^\mathsf{T} z(0) - \int_T^0 \lambda(\tau)^\mathsf{T} B(\tau) v \, \mathrm{d} \tau,
+\end{equation}
+which gives us a representer of $\mathcal{T}_2 \circ \mathcal{T}_1$, namely as
+\begin{equation}
+    (\mathcal{T}_2 \circ \mathcal{T}_1)[v] = u^\mathsf{T} v
+    \quad \text{where} \quad
+    u = \lambda(0) - \int_T^0 B(\tau)^\mathsf{T} \lambda(\tau) \, \mathrm{d} \tau.
+    \label{eq:representer2}
+\end{equation}
+We can find an ODE which $\lambda(t)$ must satisfy by
+differentiating both sides of~\eqref{eq:representer} with respect to time:
+\begin{align}
+    0 &= \lambda(t)^\mathsf{T} \dot z(t) + \dot \lambda(t)^\mathsf{T} z(t) - \lambda(t)^\mathsf{T} B(t) v
+    \\
+    &= \lambda(t)^\mathsf{T} A(t) z(t) + \dot \lambda(t)^\mathsf{T} z(t),
+\end{align}
+and so as before $\lambda(t)$ must satisfy the linear ODE IVP
+\begin{equation}
+    \dot \lambda(t) = -A(t)^\mathsf{T} \lambda(t), \qquad \lambda(T) = w.
+\end{equation}
+To compute the integral in~\eqref{eq:representer2}, we can augment the ODE
+system to
+\begin{equation}
+    \begin{bmatrix}
+        \dot \lambda \\
+        \dot \omega
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        - A(t)^\mathsf{T} \lambda(t)
+        \\
+        B(t)^\mathsf{T} \lambda(t)
+    \end{bmatrix},
+    \qquad
+    \begin{bmatrix}
+        \lambda(T) \\
+        0
+    \end{bmatrix}.
+\end{equation}
 
 \end{document}
